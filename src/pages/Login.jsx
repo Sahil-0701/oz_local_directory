@@ -1,10 +1,13 @@
 import { HashtagIcon, LockClosedIcon } from '@heroicons/react/16/solid'
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { useForm } from "react-hook-form"
 import { yupResolver } from '@hookform/resolvers/yup';
 import schema from '../validationSchemas/login';
+import { useState } from 'react';
 
 function Login() {
+    const navigate = useNavigate();
+    const [errorMessage, setErrorMessage] = useState(false);
     const {
         register,
         handleSubmit,
@@ -13,15 +16,28 @@ function Login() {
         resolver: yupResolver(schema),
       });
     
-      const onSubmit = (data) => console.log(data)
-
-    console.log({errors})
+      const onSubmit = (data) => {
+        console.log(data);
+        if(data.email === 'nabin@skilluplabs.com.au' && data.password === '12345678') {
+            navigate('/dashboard');
+        }
+        else {
+            setErrorMessage(true);
+        }
+      }
     return (
         <>
             <p className="text-sm text-gray-500">
                 Only login via email, Google, or +86 phone number login is supported in your region.   
             </p>
 
+            {
+                errorMessage && (
+                    <p className="text-sm text-red-500">
+                        Email and password does not match. Please try using different login details!
+                    </p>
+                )
+            }
 
             <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-3'>
                 <div>
