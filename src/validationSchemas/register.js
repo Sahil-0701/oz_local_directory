@@ -6,7 +6,7 @@ const schema = yup
     password: yup.string().required("Please enter your password.").min(8, "Password must be between 8 and 50 characters."),
     confirm_password: yup.string().required("Please re-enter your password for confirmation.").oneOf([yup.ref('password'), null], 'Password doesn\'t match.'),
     code: yup.string().required("Please enter the verification code."),
-    confirm: yup.string().required("Please check the checkbox to continue.")
+    confirm: yup.string().required("Please check the checkbox to continue.").oneOf(['true'], 'Please check the checkbox to continue.')
 })
 
 export default schema;
