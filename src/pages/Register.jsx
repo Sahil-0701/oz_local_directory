@@ -3,17 +3,27 @@ import { Link } from 'react-router';
 import { useForm } from "react-hook-form"
 import { yupResolver } from '@hookform/resolvers/yup';
 import schema from '../validationSchemas/register';
+import { sendCodeAction } from '../actions/authActions';
 
 function Register() {
     const {
         register,
         handleSubmit,
+        watch,
         formState: { errors },
       } = useForm({
         resolver: yupResolver(schema),
       });
     
       const onSubmit = (data) => console.log(data)
+
+      async function sendCode() {
+        const email = watch('email');
+        if(email) {
+            const data = await sendCodeAction(email);
+            console.log({data});
+        }
+      }
 
 
     return (
@@ -82,7 +92,7 @@ function Register() {
                         </div>
                     </div>
 
-                    <button className='rounded-md mt-2 bg-white px-3  text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 w-[100px] hover:bg-gray-100'>Send code</button>
+                    <button onClick={() => sendCode()} className='rounded-md mt-2 bg-white px-3  text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 w-[100px] hover:bg-gray-100'>Send code</button>
 
                 </div>
 
