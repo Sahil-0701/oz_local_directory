@@ -15,6 +15,10 @@ import DashboardLayout from './layouts/DashboardLayout.jsx';
 import JobDetails from './pages/JobDetails.jsx';
 import NewJob from './pages/NewJob.jsx';
 import EditJob from './pages/EditJob.jsx';
+import Rooms from './pages/Rooms.jsx';
+import NewRoom from './pages/NewRoom.jsx';
+import RoomDescription from './pages/RoomDescription.jsx';
+import EditRoom from './pages/EditRoom.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -35,6 +39,12 @@ createRoot(document.getElementById('root')).render(
           <Route path="jobs/new" element={<NewJob />} />
           <Route path="jobs/:id" element={<JobDetails />} />
           <Route path="jobs/:id/edit" element={<EditJob />} />
+          <Route path="rooms" element={<Rooms />} />
+          <Route path="rooms/new" element={<NewRoom />} />
+          <Route path="rooms/:id" element={<RoomDescription />} />
+          <Route path="rooms/:id/edit" element={<EditRoom />} />
+
+
         </Route>
 
       </Routes>
